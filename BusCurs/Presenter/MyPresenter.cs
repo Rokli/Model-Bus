@@ -49,9 +49,8 @@ namespace BusCurs.Presenter
                 window.ShowDialog();
             }
             else
-            {
-                StartPath();
-            }
+             StartPath();
+            
         }
         private void StartPath()
         {

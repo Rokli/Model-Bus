@@ -22,7 +22,7 @@ namespace BusCurs.Model
             Random random = new Random();
             double chance = random.NextDouble();
             if (chance > 0 && chance < 0.005) bus._time += Randoms.Parametre_ravn(10, 30);
-            bus._time += PickDay();
+            if (chance > 0 && chance < 0.005) bus._time += PickDay();
             bus._time += length / bus._speed;
             return bus;
         }
