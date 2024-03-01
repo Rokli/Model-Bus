@@ -36,6 +36,8 @@ namespace BusCurs.View.CLass
         private Label label9;
         private RadioButton UniformRadio;
         private RadioButton ExpRadio;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private FlowLayoutPanel flowLayoutPanel2;
         private TextBox NumberBusOne;
 
         public MyChart inputControlChart { set => Controls.Add(value); }
@@ -43,7 +45,7 @@ namespace BusCurs.View.CLass
         public TextBox[][] getTextBox { get; set; }
         public RadioButton[] getRadioButton { get; set; }
 
-        public RadioButton[] getDistribution {  get; set; }
+        public RadioButton[] getDistribution {  get; set; } 
         public string path { get; set; } = "C:\\Users\\satal\\source\\repos\\BusCurs\\BusCurs\\Save\\textbox.json";
 
         public MyVIew(SaveLoad load)
@@ -55,6 +57,11 @@ namespace BusCurs.View.CLass
             getRadioButton = [NumberTimeEigth, NumberTimeDay, NumberTimeEvening];
             getTextBox = load.Load(path, getTextBox);
             getDistribution = [UniformRadio, ExpRadio];
+            flowLayoutPanel1.Controls.Add(NumberTimeEigth);
+            flowLayoutPanel1.Controls.Add(NumberTimeDay);
+            flowLayoutPanel1.Controls.Add(NumberTimeEvening);
+            flowLayoutPanel2.Controls.Add(UniformRadio);
+            flowLayoutPanel2.Controls.Add(ExpRadio);
         }
         private void InitializeComponent()
         {
@@ -83,6 +90,8 @@ namespace BusCurs.View.CLass
             this.label9 = new System.Windows.Forms.Label();
             this.UniformRadio = new System.Windows.Forms.RadioButton();
             this.ExpRadio = new System.Windows.Forms.RadioButton();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.SuspendLayout();
             // 
             // NumberBusOne
@@ -257,7 +266,6 @@ namespace BusCurs.View.CLass
             this.NumberTimeDay.Name = "NumberTimeDay";
             this.NumberTimeDay.Size = new System.Drawing.Size(59, 20);
             this.NumberTimeDay.TabIndex = 23;
-            this.NumberTimeDay.TabStop = true;
             this.NumberTimeDay.Text = "13:00";
             this.NumberTimeDay.UseVisualStyleBackColor = true;
             // 
@@ -268,14 +276,13 @@ namespace BusCurs.View.CLass
             this.NumberTimeEvening.Name = "NumberTimeEvening";
             this.NumberTimeEvening.Size = new System.Drawing.Size(59, 20);
             this.NumberTimeEvening.TabIndex = 24;
-            this.NumberTimeEvening.TabStop = true;
             this.NumberTimeEvening.Text = "19:00";
             this.NumberTimeEvening.UseVisualStyleBackColor = true;
             // 
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(421, 327);
+            this.label9.Location = new System.Drawing.Point(418, 327);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(152, 16);
             this.label9.TabIndex = 25;
@@ -284,28 +291,42 @@ namespace BusCurs.View.CLass
             // UniformRadio
             // 
             this.UniformRadio.AutoSize = true;
-            this.UniformRadio.Location = new System.Drawing.Point(424, 347);
+            this.UniformRadio.Location = new System.Drawing.Point(419, 346);
             this.UniformRadio.Name = "UniformRadio";
             this.UniformRadio.Size = new System.Drawing.Size(118, 20);
             this.UniformRadio.TabIndex = 26;
-            this.UniformRadio.TabStop = true;
             this.UniformRadio.Text = "Равномерное";
             this.UniformRadio.UseVisualStyleBackColor = true;
             // 
             // ExpRadio
             // 
             this.ExpRadio.AutoSize = true;
-            this.ExpRadio.Location = new System.Drawing.Point(549, 347);
+            this.ExpRadio.Location = new System.Drawing.Point(542, 346);
             this.ExpRadio.Name = "ExpRadio";
             this.ExpRadio.Size = new System.Drawing.Size(155, 20);
             this.ExpRadio.TabIndex = 27;
-            this.ExpRadio.TabStop = true;
             this.ExpRadio.Text = "Экспоненциальное";
             this.ExpRadio.UseVisualStyleBackColor = true;
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(419, 248);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(215, 29);
+            this.flowLayoutPanel1.TabIndex = 28;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(419, 346);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(291, 29);
+            this.flowLayoutPanel2.TabIndex = 29;
             // 
             // MyVIew
             // 
             this.ClientSize = new System.Drawing.Size(722, 538);
+            this.Controls.Add(this.flowLayoutPanel2);
+            this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.ExpRadio);
             this.Controls.Add(this.UniformRadio);
             this.Controls.Add(this.label9);
