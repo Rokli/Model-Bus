@@ -3,24 +3,34 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace BusCurs.Model
 {
-    public static class Randoms
+    public class Randoms
     {
-        public static float Parametre_exp(float min, float max)//экспоненциальное распределение
+        public ExponentialDistribution exp { get; set; } = new ExponentialDistribution();
+        public UniformDistribution uniform { get; set; } = new UniformDistribution();
+        public int _rand { get; set; }
+        public Randoms(RadioButton[] radioButtons)
         {
-            NormalDistribution r = new NormalDistribution();
-            Random r_ = new Random();
-            float result = ((float)(-Math.Log(r_.NextDouble())) / 2.0f);
-            return (float)(min + result * (max - min));
+            CheckRadioButton(radioButtons);
+        }
+        public Randoms(int rand)
+        {
+            _rand = rand;
         }
 
-        public static float Parametre_ravn(float min, float max)//равномерное распределение
+        public void CheckRadioButton(RadioButton[] radioButtons)
         {
-            NormalDistribution r = new NormalDistribution();
-            Random r_ = new Random();
-            return (float)(min + r_.NextDouble() * (max - min));
+            if (radioButtons[0].Checked) _rand = 0;
+            else _rand = 1;
+        }
+        public float Random(float min, float max)
+        {
+            if (_rand == 0) return exp.Randoms(min, max);
+            else return uniform.Randoms(min, max);
         }
     }
+    
 }

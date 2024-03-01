@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="Model\Bus.cs" />
     <Compile Include="Model\BusStation.cs" />
+    <Compile Include="Model\ExponentialDistribution.cs" />
     <Compile Include="Model\Human.cs" />
     <Compile Include="Model\Interface\IRoadBus.cs" />
     <Compile Include="Model\MyChart.cs">
@@ -64,6 +65,7 @@
     <Compile Include="Model\Randoms.cs" />
     <Compile Include="Model\Road.cs" />
     <Compile Include="Model\SaveLoad.cs" />
+    <Compile Include="Model\UniformDistribution.cs" />
     <Compile Include="Presenter\MyPresenter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -11,9 +11,10 @@ namespace BusCurs.View.Interface
 {
     public interface IMyVIew
     {
-        MyChart InputControlChart { set; }
-        Button InputControlButton { set; }
-        TextBox[][] GetTextBox { get; set; }
-        RadioButton[] GetRadioButton{ get; set; }
+        MyChart inputControlChart { set; }
+        Button inputControlButton { set; }
+        TextBox[][] getTextBox { get; set; }
+        RadioButton[] getRadioButton{ get; set; }
+        RadioButton[] getDistribution { get; set; }
     }
 }

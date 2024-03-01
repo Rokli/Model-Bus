@@ -20,29 +20,32 @@ namespace BusCurs.Presenter
         public string _filePath = "C:\\Users\\satal\\source\\repos\\BusCurs\\BusCurs\\Save\\textbox.json";
         SaveLoad saveLoad { get; set; } = new SaveLoad();
         public int timeDay {  get; set; }
-        public TextBox[][] GetTextBox {  get; set; }
+        public TextBox[][] getTextBox {  get; set; }
+        
+        public Randoms _rand { get; set; }
         public MyPresenter(IMyVIew view) 
         {
             _view = view;
             InitializeComponent();
+            _rand = new Randoms(_view.getDistribution);
         }    
         private void InitializeComponent()
         {
-            _view.InputControlChart = chart;
+            _view.inputControlChart = chart;
             Button butt = new Button
             {
-                Size = new Size(100, 50),
+                Size = new Size(100, 30),
                 Text = "Старт",
-                Location = new Point(420,360)
+                Location = new Point(420,380)
             };
             butt.Click += new EventHandler(Start);
-            _view.InputControlButton = butt;
+            _view.inputControlButton = butt;
             timeDay = PickDay();
         }
 
         private void Start(object args, EventArgs e)
         {
-            GetTextBox = _view.GetTextBox;
+            getTextBox = _view.getTextBox;
             if (!Check())
             {
                 CheckWindow window = new CheckWindow();
@@ -57,11 +60,11 @@ namespace BusCurs.Presenter
             chart.Series.Clear();
             IRoadBus[] buses = Route();
             chart.Series.Clear();
-            for (int i = 0; i < Convert.ToInt32(GetTextBox[0][0].Text); i++)
+            for (int i = 0; i < Convert.ToInt32(getTextBox[0][0].Text); i++)
             {
-                double speed = (double)Randoms.Parametre_ravn(float.Parse(GetTextBox[3][0].Text), float.Parse(GetTextBox[3][0].Text)) * 16.67f;
-                int member = Convert.ToInt32(GetTextBox[5][0].Text);
-                Bus bus = new Bus(speed, member);
+                double speed = (double)_rand.Random(float.Parse(getTextBox[3][0].Text), float.Parse(getTextBox[3][0].Text)) * 16.67f;
+                int member = Convert.ToInt32(getTextBox[5][0].Text);
+                Bus bus = new Bus(speed, member,_rand);
 
                 for (int j = 0; j < buses.Length; j++)
                     bus = buses[j].InputBus(bus);
@@ -72,15 +75,15 @@ namespace BusCurs.Presenter
                 chart.Series[$"{i}"].ChartType = SeriesChartType.Column;
                 chart.Series[$"{i}"].Points.AddXY(i, bus._time);
             }
-            saveLoad.Save(_filePath, GetTextBox);
+            saveLoad.Save(_filePath, getTextBox);
         }
         private IRoadBus[] Route()
         {
-            int numberStation = Convert.ToInt32(GetTextBox[1][0].Text) + Convert.ToInt32(GetTextBox[1][0].Text);
+            int numberStation = Convert.ToInt32(getTextBox[1][0].Text) + Convert.ToInt32(getTextBox[1][0].Text);
             IRoadBus[] roadBuses = new IRoadBus[numberStation];
             for(int i = 0; i < numberStation; i++)
             {
-                if (i % 2 == 0) roadBuses[i] = new Road(Convert.ToInt32(GetTextBox[4][0].Text), Convert.ToInt32(GetTextBox[4][1].Text), PickDay());
+                if (i % 2 == 0) roadBuses[i] = new Road(Convert.ToInt32(getTextBox[4][0].Text), Convert.ToInt32(getTextBox[4][1].Text), PickDay(), _rand);
                 else roadBuses[i] = new BusStation(CreatePeople(),i);
             }
             return roadBuses;
@@ -90,18 +93,18 @@ namespace BusCurs.Presenter
         {
             Random rand = new Random();
             Queue<Human> people = new Queue<Human>();
-            double randPeople = Randoms.Parametre_ravn(Convert.ToInt32(GetTextBox[2][0].Text), Convert.ToInt32(GetTextBox[2][1].Text)); 
+            double randPeople = _rand.Random(Convert.ToInt32(getTextBox[2][0].Text), Convert.ToInt32(getTextBox[2][1].Text)); 
             for(int i = 0; i < randPeople; i++)
             {
-                people.Enqueue(new Human(rand.Next(1, Convert.ToInt32(GetTextBox[1][0].Text))));
+                people.Enqueue(new Human(rand.Next(1, Convert.ToInt32(getTextBox[1][0].Text))));
             }
             return people;
         }
         private int PickDay()
         {
-            if (_view.GetRadioButton[0].Checked)
+            if (_view.getRadioButton[0].Checked)
                 return 0;
-            else if(_view.GetRadioButton[1].Checked) 
+            else if(_view.getRadioButton[1].Checked) 
                 return 1;
             else return 2;
         }
@@ -126,7 +129,7 @@ namespace BusCurs.Presenter
         {
             int[] tmp = new int[10];
             int i = 0;
-            foreach(TextBox[] text in GetTextBox)
+            foreach(TextBox[] text in getTextBox)
             {
                 foreach(TextBox t in text)
                 {

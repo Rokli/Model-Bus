@@ -14,8 +14,10 @@ namespace BusCurs.Model
         public double _speed {  get; set; }
         public double _time {  get; set; } = 0 ;
 
-        public Bus(double speed, int memberHumans) 
+        public Randoms _rand {  get; set; }
+        public Bus(double speed, int memberHumans,Randoms rand) 
         {
+            _rand = rand;
             _memberHumans = memberHumans;
             _humans = new Queue<Human>(memberHumans);
             _speed = speed;
@@ -27,7 +29,7 @@ namespace BusCurs.Model
                 if (!human.Any())
                     return human;
                 _humans.Enqueue(human.Dequeue());
-                _time += Randoms.Parametre_ravn(0.2f,1.6f);
+                _time += _rand.Random(0.2f,1.6f);
             }
             return human;
         }

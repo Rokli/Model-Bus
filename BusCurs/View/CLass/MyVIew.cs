@@ -33,23 +33,28 @@ namespace BusCurs.View.CLass
         private RadioButton NumberTimeEigth;
         private RadioButton NumberTimeDay;
         private RadioButton NumberTimeEvening;
+        private Label label9;
+        private RadioButton UniformRadio;
+        private RadioButton ExpRadio;
         private TextBox NumberBusOne;
 
-        public MyChart InputControlChart { set => Controls.Add(value); }
-        public Button InputControlButton { set => Controls.Add(value); }
-        public TextBox[][] GetTextBox { get; set; }
-        public RadioButton[] GetRadioButton { get; set; }
+        public MyChart inputControlChart { set => Controls.Add(value); }
+        public Button inputControlButton { set => Controls.Add(value); }
+        public TextBox[][] getTextBox { get; set; }
+        public RadioButton[] getRadioButton { get; set; }
 
+        public RadioButton[] getDistribution {  get; set; }
         public string path { get; set; } = "C:\\Users\\satal\\source\\repos\\BusCurs\\BusCurs\\Save\\textbox.json";
 
         public MyVIew(SaveLoad load)
         {
             InitializeComponent();
-            GetTextBox = [[NumberBusOne],[NumberStation],[NumberPeopleOne,NumberPeopleTwo],
+            getTextBox = [[NumberBusOne],[NumberStation],[NumberPeopleOne,NumberPeopleTwo],
                          [NumberBusSpeedOne, NumberBusSpeedTwo],[NumberRoadOne,NumberRoadTwo],
                          [NumberMember]];
-            GetRadioButton = [NumberTimeEigth, NumberTimeDay, NumberTimeEvening];
-            GetTextBox = load.Load(path, GetTextBox);
+            getRadioButton = [NumberTimeEigth, NumberTimeDay, NumberTimeEvening];
+            getTextBox = load.Load(path, getTextBox);
+            getDistribution = [UniformRadio, ExpRadio];
         }
         private void InitializeComponent()
         {
@@ -75,6 +80,9 @@ namespace BusCurs.View.CLass
             this.NumberTimeEigth = new System.Windows.Forms.RadioButton();
             this.NumberTimeDay = new System.Windows.Forms.RadioButton();
             this.NumberTimeEvening = new System.Windows.Forms.RadioButton();
+            this.label9 = new System.Windows.Forms.Label();
+            this.UniformRadio = new System.Windows.Forms.RadioButton();
+            this.ExpRadio = new System.Windows.Forms.RadioButton();
             this.SuspendLayout();
             // 
             // NumberBusOne
@@ -264,9 +272,43 @@ namespace BusCurs.View.CLass
             this.NumberTimeEvening.Text = "19:00";
             this.NumberTimeEvening.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(421, 327);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(152, 16);
+            this.label9.TabIndex = 25;
+            this.label9.Text = "Закон распределения";
+            // 
+            // UniformRadio
+            // 
+            this.UniformRadio.AutoSize = true;
+            this.UniformRadio.Location = new System.Drawing.Point(424, 347);
+            this.UniformRadio.Name = "UniformRadio";
+            this.UniformRadio.Size = new System.Drawing.Size(118, 20);
+            this.UniformRadio.TabIndex = 26;
+            this.UniformRadio.TabStop = true;
+            this.UniformRadio.Text = "Равномерное";
+            this.UniformRadio.UseVisualStyleBackColor = true;
+            // 
+            // ExpRadio
+            // 
+            this.ExpRadio.AutoSize = true;
+            this.ExpRadio.Location = new System.Drawing.Point(549, 347);
+            this.ExpRadio.Name = "ExpRadio";
+            this.ExpRadio.Size = new System.Drawing.Size(155, 20);
+            this.ExpRadio.TabIndex = 27;
+            this.ExpRadio.TabStop = true;
+            this.ExpRadio.Text = "Экспоненциальное";
+            this.ExpRadio.UseVisualStyleBackColor = true;
+            // 
             // MyVIew
             // 
             this.ClientSize = new System.Drawing.Size(722, 538);
+            this.Controls.Add(this.ExpRadio);
+            this.Controls.Add(this.UniformRadio);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.NumberTimeEvening);
             this.Controls.Add(this.NumberTimeDay);
             this.Controls.Add(this.NumberTimeEigth);
